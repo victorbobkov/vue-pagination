@@ -1,0 +1,26 @@
+/* #app {
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+[v-cloak] {
+  display: none;
+}
+
+.list {
+    display: flex;
+    width: 1000px;
+    justify-content: center;
+    align-items: center;
+}
+
+.listItem {
+    width: 150px;
+} */
+
+.list-group {
+    flex-direction: row;
+}

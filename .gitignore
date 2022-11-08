@@ -1,0 +1,6 @@
+.idea/
+.vscode/
+multiselect.html
+multiselect.js
+node_modules/
+.DS_Store
