@@ -1,12 +1,8 @@
-// const { default: axios } = require("axios");
-// import axios from "axios";
-// import { axios } from 'axios'
-
 new Vue({
   el: '#app2',
   data() {
     return {
-      posts: [],
+      landingPreviews: [],
       pageNumber: 1,
       limitPerPage: 9,
       totalPages: 0,
@@ -15,10 +11,10 @@ new Vue({
   },
   methods: {
     changePage(page) {
-      this.pageNumber = page
-      this.fetchPosts()
+      this.pageNumber = page;
+      this.fetchLandingPreviews();
     },
-    async fetchPosts() {
+    async fetchLandingPreviews() {
       try {
         const response = await axios.get('https://jsonplaceholder.typicode.com/photos', {
           params: {
@@ -26,15 +22,15 @@ new Vue({
             _limit: this.limitPerPage,
           }
         })
-        this.totalPages = Math.ceil((response.headers['x-total-count'] - 4900) / this.limitPerPage)
-        this.posts = response.data
-        console.log(response)
+        this.totalPages = Math.ceil((response.headers['x-total-count'] - 4900) / this.limitPerPage);
+        this.landingPreviews = response.data;
+        console.log(response);
       } catch(e) {
         console.log(e);
       }
     }
   },
   mounted() {
-    this.fetchPosts()
+    this.fetchLandingPreviews()
   }
- })
+});

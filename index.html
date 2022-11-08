@@ -12,12 +12,12 @@
     <div id="app2" class="container">
         <input v-model="searchQuery ">
         <div class="row preview__container">
-            <div class="col-lg-4 col-12 preview__link-wrapper" v-for="post in posts">
+            <div class="col-lg-4 col-12 preview__link-wrapper" v-for="preview in landingPreviews">
                 <div class="preview__site-container" >
-                    <div class="preview__site-container--image" v-if="post.url">
-                        <img class="photo" v-bind:src="post.url" alt="">
+                    <div class="preview__site-container--image" v-if="preview.url">
+                        <img class="photo" v-bind:src="preview.url" alt="">
                     </div>
-                    <div>{{ post.title }}</div>
+                    <div>{{ preview.title }}</div>
                 </div>
             </div>
         </div>
