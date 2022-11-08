@@ -30,6 +30,7 @@
                         :class="{
                             'preview__pagination--page__selected': pageNumber === page
                         }"
+                        @click="changePage(page)"
                     >
                         {{ page }}
                     </p>

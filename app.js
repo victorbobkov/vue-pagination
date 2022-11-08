@@ -14,22 +14,25 @@ new Vue({
     }
   },
   methods: {
-   async fetchPosts() {
-    try {
-      // const response = await axios.get('https://jsonplaceholder.typicode.com/posts?_limit=10')
-      const response = await axios.get('https://jsonplaceholder.typicode.com/photos', {
-        params: {
-          _page: this.pageNumber,
-          _limit: this.limitPerPage,
-        }
-      })
-      this.totalPages = Math.ceil((response.headers['x-total-count'] - 4900) / this.limitPerPage)
-      this.posts = response.data
-      console.log(response)
-    } catch(e) {
-      console.log(e);
+    changePage(page) {
+      this.pageNumber = page
+      this.fetchPosts()
+    },
+    async fetchPosts() {
+      try {
+        const response = await axios.get('https://jsonplaceholder.typicode.com/photos', {
+          params: {
+            _page: this.pageNumber,
+            _limit: this.limitPerPage,
+          }
+        })
+        this.totalPages = Math.ceil((response.headers['x-total-count'] - 4900) / this.limitPerPage)
+        this.posts = response.data
+        console.log(response)
+      } catch(e) {
+        console.log(e);
+      }
     }
-   }
   },
   mounted() {
     this.fetchPosts()
