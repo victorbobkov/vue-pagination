@@ -10,10 +10,26 @@
 </head>
 <body> 
     <div id="app2" class="container">
-        <input v-model="searchQuery ">
+        <input 
+            v-model="searchQuery"
+        >
+        <select v-model="selectedSort" :v-for="sortOptions">
+            <option disabled value="">Выберите из списка</option>
+            <option 
+                v-for="option in sortOptions" 
+                :key="option.value" 
+                :value="option.value"
+            >
+                {{ option.name }}
+            </option>
+        </select>
+        <p>Показано {{landingPreviews.length}} из {{totalPages * landingPreviews.length}} сайтов</p>
         <div class="row preview__container">
-            <div class="col-lg-4 col-12 preview__link-wrapper" v-for="preview in landingPreviews">
-                <div class="preview__site-container" >
+            <div
+                class="col-lg-4 col-12 preview__link-wrapper"
+                v-for="preview in searchedLandings"
+            >
+                <div class="preview__site-container">
                     <div class="preview__site-container--image" v-if="preview.url">
                         <img class="photo" v-bind:src="preview.url" alt="">
                     </div>

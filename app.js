@@ -6,7 +6,14 @@ new Vue({
       pageNumber: 1,
       limitPerPage: 9,
       totalPages: 0,
-      searchQuery: ''
+      searchQuery: '',
+      modelValue: {},
+      // options: [],
+      selectedSort: '',
+      sortOptions: [
+        {value: 'title', name: 'По названию'},
+        {value: 'body', name: 'По описанию'},
+      ]
     }
   },
   methods: {
@@ -24,13 +31,27 @@ new Vue({
         })
         this.totalPages = Math.ceil((response.headers['x-total-count'] - 4900) / this.limitPerPage);
         this.landingPreviews = response.data;
-        console.log(response);
       } catch(e) {
         console.log(e);
       }
+    },
+    changeOption(event) {
+      this.$emit('update:modelValue', event.target.value); //update:selectedSort
     }
   },
   mounted() {
-    this.fetchLandingPreviews()
+    this.fetchLandingPreviews();
+  },
+  computed: {
+    searchedLandings() {
+      return this.landingPreviews.filter(preview => preview.title.includes(this.searchQuery));
+    }
+  },
+  watch: {
+    selectedSort(newValue) {
+      this.landingPreviews.sort((land1, land2) => {
+        return land1[newValue]?.localeCompare(land2[newValue]);
+      });
+    }
   }
 });
